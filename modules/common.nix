@@ -1,0 +1,56 @@
+{ config, pkgs, ... }:
+
+let
+  berkeleyMonoNerdFont = pkgs.stdenvNoCC.mkDerivation {
+    pname = "berkeley-mono-nerd-font";
+    version = "1";
+    src = ./dotfiles/fonts/BerkeleyMonoNerdFont.zip;
+    nativeBuildInputs = [ pkgs.unzip ];
+    unpackPhase = "unzip $src -d .";
+    installPhase = ''
+      mkdir -p $out/share/fonts/opentype
+      cp BerkeleyMonoNerdFont/*.otf $out/share/fonts/opentype/
+    '';
+  };
+in
+{
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  fonts.packages = [ berkeleyMonoNerdFont ];
+  fonts.fontconfig.enable = true;
+
+  time.timeZone = "America/New_York";
+
+  users.users.jz9 = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ];
+    shell = pkgs.powershell;
+  };
+
+  virtualisation.docker.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    # core cli
+    git gh curl wget jq ripgrep fzf bat eza tree unzip xz p7zip
+    plocate whois sshfs fortune cowsay lolcat hyperfine cloc
+    neofetch universal-ctags parallel pciutils nettools smartmontools
+    valgrind mold graphviz pandoc sops age cosign tailscale starship
+
+    # build toolchain
+    gcc clang gfortran cmake automake bison flex gperf nasm yasm
+    pkg-config binutils swig gnumake
+
+    # editor / terminal
+    neovim powerline powershell
+
+    # language runtimes
+    go dart crystal elixir ruby php82 opam ocaml swiProlog luajit
+    graalvm-ce maven javacc python3 postgresql_15
+    gradle kotlin julia-bin bun zig dotnet-sdk_8
+
+    # k8s / containers
+    k9s minikube kcachegrind kubernetes-helm
+
+    texlive.combined.scheme-full
+  ];
+}
