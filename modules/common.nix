@@ -35,6 +35,7 @@ in
     plocate whois sshfs fortune cowsay lolcat hyperfine cloc
     fastfetch universal-ctags parallel pciutils nettools smartmontools
     valgrind mold graphviz pandoc sops age cosign tailscale starship
+    kdePackages.kcachegrind
 
     # build toolchain
     gcc clang gfortran cmake automake bison flex gperf nasm yasm
@@ -49,7 +50,7 @@ in
     gradle kotlin julia-bin bun zig dotnet-sdk_8
 
     # k8s / containers
-    k9s minikube kcachegrind kubernetes-helm
+    k9s minikube kubernetes-helm
 
     texlive.combined.scheme-full
   ];
