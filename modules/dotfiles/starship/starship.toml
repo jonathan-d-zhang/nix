@@ -1,0 +1,193 @@
+#### Colors
+# Username,       Path,      Git Stuff,              Languages
+
+# Rainbow
+# Light Crimson  Fawn      Calamansi              Granny Smith Apple
+# EA6C92         F0A573    FFF6A3                 ABEDA1
+
+# Kinda softish pale and cold
+# Azureish White Aero Blue Light Goldenrod Yellow Pale Pink
+# CCE1F2         C6F8E5    FBF7D5                 F9DED7
+
+# Monokai Pro Rainbow
+# Red       Orange  Yellow  Green   Blue
+# FF6188    FC9867  FFD866  A9DC76  78DCE8
+
+format = """\
+[\uE0B6](#F0A573)\
+$directory\
+[\uE0B0](fg:#F0A573 bg:#FFF6A3)\
+$git_branch\
+$git_metrics\
+$git_status\
+[\uE0B0](fg:#FFF6A3 bg:#ABEDA1)\
+$kubernetes\
+[\uE0B0 ](fg:#ABEDA1)\
+"""
+#[\uE0B0](fg:#C6F8E5 bg:#F0A573)\
+#$hostname\
+#[\uE0B0 ](fg:#FFF6A3 bg:#ABEDA1)\
+#$c\
+#$cmake\
+#$haskell\
+#$java\
+#$lua\
+#$python\
+#$rust\
+#[\uE0B0 ](fg:#FFF6A3)\
+#"""
+#[\uE0B0](fg:#FFF6A3)\
+
+[character]
+success_symbol = "[λ](#36ff90) "
+error_symbol = "[Χ](bold bright-red) "
+
+#### Git
+# $branch [+$added -$deleted] [$status]
+[git_branch]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol $branch ]($style fg:#070707)'
+
+[git_metrics]
+disabled = false
+added_style = "bg:#FFF6A3 fg:#03AC13"
+deleted_style = "bg:#FFF6A3 fg:#B90E0A"
+format = "([\b \\[](fg:#070707 bg:#FFF6A3)([+$added ]($added_style))([-$deleted ]($deleted_style))[\b\\] ](fg:#070707 bg:#FFF6A3))"
+
+[git_status]
+style = "bg:#FFF6A3 fg:#070707"
+modified = "" # git_metrics shows us if we've modified files already
+deleted = "X" # default char is too curvy, replace with normal X
+format = "([\b \\[](bg:#FFF6A3 fg:#070707)[$all_status$ahead_behind]($style)[\\] ](bg:#FFF6A3 fg:#070707))"
+
+
+#### Environment
+[aws]
+disabled = true
+symbol = ""
+
+[conda]
+symbol = ""
+
+[directory]
+style = "bg:#F0A573"
+format = "[ $path ]($style fg:#070707)"
+read_only = " "
+truncation_length = 3
+truncation_symbol = "…/"
+
+[docker_context]
+symbol = ""
+
+[kubernetes]
+disabled = false
+style = "bg:#ABEDA1"
+format = '[ $symbol $context ]($style fg:#070707)'
+
+[nix_shell]
+symbol = ""
+
+[package]
+disabled = true
+
+[username]
+show_always = false
+style_user = "bg:#C6F8E5"
+style_root = "bg:#C6F8E5"
+format = '[$user ]($style fg:#070707)'
+
+[hostname]
+ssh_only = false
+style = "bg:#C6F8E5"
+format = '[$hostname ]($style fg:#070707)'
+
+#### Languages
+[c]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[dart]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[elixir]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[elm]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[golang]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[java]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[julia]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[lua]
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[nim]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[perl]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[php]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[python]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) (\($virtualenv\)) ]($style fg:#070707)'
+
+[ruby]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[rust]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[scala]
+symbol = ""
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+[swift]
+symbol = "ﯣ"
+style = "bg:#FFF6A3"
+format = '[ $symbol ($version) ]($style fg:#070707)'
+
+# Misc
+[memory_usage]
+symbol = ""
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#9EB8FF"
+format = '[ $time ]($style fg:#070707)'

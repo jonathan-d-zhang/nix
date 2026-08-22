@@ -49,7 +49,10 @@
       };
     };
 
-    programs.starship.enable = true;
+    programs.starship = {
+      enable = true;
+      settings = builtins.fromTOML (builtins.readFile ./dotfiles/starship/starship.toml);
+    };
 
     programs.jujutsu = {
       enable = true;
