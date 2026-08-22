@@ -10,7 +10,7 @@
       owner = "anthropics";
       repo = "claude-plugins-official";
       rev = "340e33aef211d95769d252324854497af871dafe"; # main as of 2026-08-22
-      hash = pkgs.lib.fakeHash; # `nix flake check` will print the real hash to paste in here
+      hash = "sha256-bGdXvzhWPwGdz3T2Yh2h6lf+3PBRFAfdBxP5pESmCHI=";
     };
     ponytailPlugin = pkgs.fetchFromGitHub {
       owner = "DietrichGebert";

@@ -65,7 +65,7 @@ in
     # k8s / containers
     docker k9s minikube kubernetes-helm
 
-    # tex: minimal + lualatex. tlmgr is bundled with any texlive.combine output.
-    (texlive.combine { inherit (texlive) scheme-basic collection-luatex; })
+    # tex: small + lualatex. tlmgr is bundled with any texlive package.
+    (texliveSmall.withPackages (ps: with ps; [ collection-luatex ]))
   ];
 }
