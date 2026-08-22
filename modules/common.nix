@@ -45,7 +45,7 @@ in
 
     # language runtimes
     go dart crystal elixir ruby php82 opam ocaml swi-prolog luajit
-    graalvm-ce maven javacc python3 postgresql_15
+    graalvmPackages.graalvm-ce maven javacc python3 postgresql_15
     gradle kotlin julia-bin bun zig dotnet-sdk_8
 
     # k8s / containers
