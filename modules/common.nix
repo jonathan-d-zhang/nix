@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   berkeleyMonoNerdFont = pkgs.stdenvNoCC.mkDerivation {
@@ -16,8 +16,14 @@ in
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "claude-code"
+  ];
+
   fonts.packages = [ berkeleyMonoNerdFont ];
   fonts.fontconfig.enable = true;
+
+  services.tailscale.enable = true;
 
   time.timeZone = "America/New_York";
 
@@ -45,13 +51,21 @@ in
     neovim powerline powershell
 
     # language runtimes
-    go dart crystal elixir ruby php82 opam ocaml swi-prolog luajit
-    graalvmPackages.graalvm-ce maven javacc python3 postgresql_15
-    gradle kotlin julia-bin bun zig dotnet-sdk_8
+    luajit
+    graalvmPackages.graalvm-ce
+    uv
+    nodejs
+
+    ## rust
+    cargo
+    rustc
+    rustup
+    rust-analyzer
 
     # k8s / containers
-    k9s minikube kubernetes-helm
+    docker k9s minikube kubernetes-helm
 
-    texlive.combined.scheme-full
+    # tex: minimal + lualatex. tlmgr is bundled with any texlive.combine output.
+    (texlive.combine { inherit (texlive) scheme-basic collection-luatex; })
   ];
 }

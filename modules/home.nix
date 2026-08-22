@@ -3,8 +3,33 @@
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.jz9 = { pkgs, ... }: {
+  home-manager.users.jz9 = { pkgs, ... }:
+  let
+    # Mirrors ~/.claude/plugins/known_marketplaces.json + installed_plugins.json.
+    claudePluginsOfficial = pkgs.fetchFromGitHub {
+      owner = "anthropics";
+      repo = "claude-plugins-official";
+      rev = "340e33aef211d95769d252324854497af871dafe"; # main as of 2026-08-22
+      hash = pkgs.lib.fakeHash; # `nix flake check` will print the real hash to paste in here
+    };
+    ponytailPlugin = pkgs.fetchFromGitHub {
+      owner = "DietrichGebert";
+      repo = "ponytail";
+      rev = "2ed6c52c9d7e5e56942508591085fd45dea277d3"; # pinned to the commit currently installed
+      hash = pkgs.lib.fakeHash;
+    };
+  in {
     home.stateVersion = "24.11";
+
+    programs.claude-code = {
+      enable = true;
+      marketplaces.ponytail = ponytailPlugin;
+      plugins = {
+        pyright-lsp = "${claudePluginsOfficial}/plugins/pyright-lsp";
+        rust-analyzer-lsp = "${claudePluginsOfficial}/plugins/rust-analyzer-lsp";
+        ponytail = ponytailPlugin;
+      };
+    };
 
     programs.git = {
       enable = true;
