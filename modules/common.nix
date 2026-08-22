@@ -33,7 +33,7 @@ in
     # core cli
     git gh curl wget jq ripgrep fzf bat eza tree unzip xz p7zip
     plocate whois sshfs fortune cowsay lolcat hyperfine cloc
-    neofetch universal-ctags parallel pciutils nettools smartmontools
+    fastfetch universal-ctags parallel pciutils nettools smartmontools
     valgrind mold graphviz pandoc sops age cosign tailscale starship
 
     # build toolchain
