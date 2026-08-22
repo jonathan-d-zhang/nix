@@ -5,14 +5,15 @@
   home-manager.useUserPackages = true;
   home-manager.users.jz9 = { pkgs, ... }:
   let
-    # Mirrors ~/.claude/plugins/known_marketplaces.json + installed_plugins.json.
     claudePluginsOfficial = pkgs.fetchFromGitHub {
+      name = "claude-plugins-official-source";
       owner = "anthropics";
       repo = "claude-plugins-official";
       rev = "340e33aef211d95769d252324854497af871dafe"; # main as of 2026-08-22
       hash = "sha256-bGdXvzhWPwGdz3T2Yh2h6lf+3PBRFAfdBxP5pESmCHI=";
     };
     ponytailPlugin = pkgs.fetchFromGitHub {
+      name = "ponytail-plugin-source";
       owner = "DietrichGebert";
       repo = "ponytail";
       rev = "2ed6c52c9d7e5e56942508591085fd45dea277d3"; # pinned to the commit currently installed
