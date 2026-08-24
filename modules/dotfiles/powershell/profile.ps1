@@ -10,12 +10,20 @@ $env:EDITOR = "vim"
 # ...but make vim point to nvim
 Set-Alias vim nvim
 
-# Suggestions are rendered in a drop-down list.
-# Disabled for now because it makes ssh connections hang (?)
-# Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption @{
+    # Suggestions are rendered in a drop-down list.
+    # Disabled for now because it makes ssh connections hang (?)
+    PredictionViewStyle = "ListView"
 
-# Enable predictive Intellisense.
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+    # Enable predictive Intellisense.
+    PredictionSource = "HistoryAndPlugin"
+
+    # Remember everything
+    MaximumHistoryCount = 1000000
+
+    # Key bindings emulate Vi
+    EditMode = "Vi"
+}
 
 # Show me the Information stream by default
 $InformationActionPreference = "Continue"

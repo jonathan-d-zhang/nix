@@ -1,4 +1,3 @@
-# Installs as a separate WSL distro, side-by-side with the existing Ubuntu install.
 { lib, pkgs, ... }:
 
 {
