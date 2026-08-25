@@ -56,6 +56,7 @@ set formatoptions=q         " Format text with gq, but don't format as I type.
 set formatoptions+=j        " When joining lines, remove comment leaders.
 set formatoptions+=n        " gq recognizes numbered lists, and will try to
 set formatoptions+=1        " break before, not after, a 1 letter word
+set textwidth=100           " Wrap at 100 characters.
 
 """" Display
 set number                  " Display line numbers
