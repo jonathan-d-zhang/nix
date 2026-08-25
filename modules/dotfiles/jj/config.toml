@@ -35,3 +35,9 @@ mainline = ["rebase", "-A", "closest_pushable(@)"]
 
 [template-aliases]
 'format_timestamp(timestamp)' = 'timestamp.ago()'
+
+[working-copy]
+# Apply EOL conversion on both file check-in to and file check-out from the
+# backend store, so you have CRLF line endings in your working directory while
+# the repository has LF line endings. Similar to `core.autocrlf = true`.
+eol-conversion = "input-output"
