@@ -123,7 +123,8 @@ function gitInfo {
     # matches jjInfo, which diffs everything against the remote bookmark.
     $nameStatus = git diff HEAD --name-status
     $hist = git diff HEAD --stat
-    return " $(git branch --show-current) $(vcsStat $nameStatus ($hist | Select-Object -Last 1))"
+    $stat = vcsStat $nameStatus ($hist | Select-Object -Last 1)
+    return (@(" $(git branch --show-current)", $stat) | Where-Object { $_ }) -join " "
 }
 
 function vcsInfo {
@@ -191,7 +192,7 @@ function prompt {
 
     $segments += "> "
 
-    return "$([System.Environment]::NewLine)$($segments -join " ")"
+    return "$([System.Environment]::NewLine)$(($segments | Where-Object { $_ }) -join " ")"
 }
 
 Export-ModuleMember -Function prompt
