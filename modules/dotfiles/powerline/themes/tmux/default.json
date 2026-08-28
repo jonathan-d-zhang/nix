@@ -1,0 +1,30 @@
+{
+  "segments": {
+    "right": [
+      {
+        "function": "powerline.segments.common.sys.uptime",
+        "priority": 50
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "args": {
+          "format": "%d %b %y"
+        }
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%H:%M",
+          "istime": true
+        }
+      },
+      {
+        "function": "powerline.segments.common.net.hostname",
+        "args": {
+          "only_if_ssh": true
+        }
+      }
+    ]
+  }
+}

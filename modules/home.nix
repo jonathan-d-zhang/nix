@@ -109,6 +109,8 @@
       ".config/nvim/plugin/lspconfig.lua".source = ./dotfiles/nvim/plugin/lspconfig.lua;
       ".config/nvim/plugin/monokai.lua".source = ./dotfiles/nvim/plugin/monokai.lua;
 
+      ".config/powerline".source = ./dotfiles/powerline;
+
       ".config/powershell/Microsoft.PowerShell_profile.ps1".source = ./dotfiles/powershell/profile.ps1;
       ".local/share/powershell/Modules/jz9.Utils/jz9.Utils.psm1".source = ./dotfiles/powershell/jz9.Utils.psm1;
     };
