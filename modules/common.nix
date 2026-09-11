@@ -41,7 +41,7 @@ in
     plocate whois sshfs fortune cowsay lolcat hyperfine cloc
     fastfetch universal-ctags parallel pciutils nettools smartmontools
     valgrind mold graphviz pandoc sops age cosign tailscale starship
-    kdePackages.kcachegrind
+    kdePackages.kcachegrind zizmor
 
     # build toolchain
     gcc clang gfortran cmake automake bison flex gperf nasm yasm
@@ -54,6 +54,7 @@ in
     luajit
     graalvmPackages.graalvm-ce
     uv
+    pyright
     nodejs
 
     ## rust
@@ -61,6 +62,8 @@ in
     rustc
     rustup
     rust-analyzer
+    cargo-wizard
+    cargo-flamegraph
 
     # k8s / containers
     docker k9s minikube kubernetes-helm

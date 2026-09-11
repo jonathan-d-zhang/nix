@@ -45,6 +45,9 @@ if (Get-Command jj -ErrorAction Ignore) {
     $env:COMPLETE = $null
 }
 
+# zizmor completions
+zizmor --completions powershell | Invoke-Expression
+
 # Keep the native process cwd in sync with PowerShell's location so tmux's
 # #{pane_current_path} (read from /proc/<pid>/cwd) reflects the directory we cd'd to.
 $ExecutionContext.InvokeCommand.LocationChangedAction = {
@@ -192,7 +195,7 @@ function prompt {
 
     $segments += "> "
 
-    return "$([System.Environment]::NewLine)$(($segments | Where-Object { $_ }) -join " ")"
+    return "$(($segments | Where-Object { $_ }) -join " ")"
 }
 
 Export-ModuleMember -Function prompt

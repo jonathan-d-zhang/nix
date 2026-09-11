@@ -49,7 +49,8 @@ nnoremap <leader>th :tabp<CR>
 nnoremap <leader>tl :tabn<CR>
 
 """" Insert completion
-set completeopt=menuone     " Show the completion menu even if only one choice
+set completeopt=menuone,noinsert,popup " Show the menu even for one choice, don't
+                            " auto-insert, show docs in a popup.
 
 """" Text Formatting
 set formatoptions=q         " Format text with gq, but don't format as I type.

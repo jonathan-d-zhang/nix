@@ -16,7 +16,7 @@
       name = "ponytail-plugin-source";
       owner = "DietrichGebert";
       repo = "ponytail";
-      rev = "2ed6c52c9d7e5e56942508591085fd45dea277d3"; # pinned to the commit currently installed
+      rev = "2ed6c52c9d7e5e56942508591085fd45dea277d3";
       hash = "sha256-bGdXvzhWPwGdz3T2Yh2h6lf+3PBRFAfdBxP5pESmCHI=";
     };
   in {
@@ -84,20 +84,16 @@
         bind -n M-k select-pane -U
         bind -n M-l select-pane -R
 
-        set -g pane-active-border-style bg='#222222',fg='#21ffff'
-        set -g pane-border-style bg='#222222',fg=white
-
-        set -g window-style bg="#222222"
-        set -g window-active-style bg="#222222"
+        set -g pane-active-border-style fg='#21ffff'
+        set -g pane-border-style fg=white
 
         set -g pane-border-lines "simple"
         set -g pane-border-format ""
         set -g pane-border-status bottom
 
-        set-option -g allow-rename off
         set-option -ga terminal-overrides ",xterm-256color:Tc"
 
-        source "${pkgs.powerline}/share/powerline/bindings/tmux/powerline.conf"
+        source "${pkgs.powerline}/share/tmux/powerline_tmux_2.1_plus.conf"
 
         set -g @continuum-restore 'on'
         set -g @continuum-save-interval '1'
@@ -108,9 +104,7 @@
       ".config/nvim/init.vim".source = ./dotfiles/nvim/init.vim;
       ".config/nvim/plugin/lspconfig.lua".source = ./dotfiles/nvim/plugin/lspconfig.lua;
       ".config/nvim/plugin/monokai.lua".source = ./dotfiles/nvim/plugin/monokai.lua;
-
       ".config/powerline".source = ./dotfiles/powerline;
-
       ".config/powershell/Microsoft.PowerShell_profile.ps1".source = ./dotfiles/powershell/profile.ps1;
       ".local/share/powershell/Modules/jz9.Utils/jz9.Utils.psm1".source = ./dotfiles/powershell/jz9.Utils.psm1;
     };
