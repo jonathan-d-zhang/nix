@@ -46,7 +46,9 @@ if (Get-Command jj -ErrorAction Ignore) {
 }
 
 # zizmor completions
-zizmor --completions powershell | Invoke-Expression
+if (Get-Command zizmor -ErrorAction Ignore) {
+    zizmor --completions powershell | Out-String | Invoke-Expression
+}
 
 # Keep the native process cwd in sync with PowerShell's location so tmux's
 # #{pane_current_path} (read from /proc/<pid>/cwd) reflects the directory we cd'd to.
