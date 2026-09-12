@@ -1,5 +1,45 @@
 # Nix Config
 
+## Secrets
+
+Secrets live encrypted in `secrets/secrets.yaml` (sops + age) and are decrypted at
+activation into `/run/secrets`. Nothing secret is ever in a `.nix` file — the Nix
+store is world-readable.
+
+The age key at `~/.config/sops/age/keys.txt` must exist **before the first
+`nixos-rebuild switch`**, or activation fails with a decryption error.
+
+On a new machine, copy the key over from an existing one:
+
+```shell
+mkdir -p ~/.config/sops/age
+scp othermachine:~/.config/sops/age/keys.txt ~/.config/sops/age/keys.txt
+chmod 600 ~/.config/sops/age/keys.txt
+```
+
+### Editing secrets
+
+```shell
+sops secrets/secrets.yaml          # decrypts to $EDITOR, re-encrypts on save
+sops -d secrets/secrets.yaml       # just look
+```
+
+To add a secret without it ever hitting the terminal or shell history:
+
+```shell
+sops set secrets/secrets.yaml '["name"]' "$(jq -Rs . < /path/to/file)"
+```
+
+Then declare it in `modules/common.nix` so activation installs it:
+
+```nix
+sops.secrets.name = { owner = "jz9"; mode = "0400"; };
+```
+
+Consume it by **path** (`config.sops.secrets.name.path`), never by value. Multi-line
+values like private keys go in as YAML block scalars (`name: |`).
+
+
 ## To bootstrap on WSL:
 
 Assumes NixOS installed into WSL via https://nix-community.github.io/NixOS-WSL/.

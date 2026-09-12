@@ -5,9 +5,11 @@
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, sops-nix, ... }: {
     nixosConfigurations = {
       # Installed side-by-side with the existing Ubuntu WSL distro:
       #   wsl --install --from-file result/nixos.wsl   (or: nix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder, see NixOS-WSL docs)
@@ -16,6 +18,7 @@
         modules = [
           nixos-wsl.nixosModules.default
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           ./modules/common.nix
           ./modules/home.nix
           ./hosts/wsl
@@ -29,6 +32,7 @@
         system = "x86_64-linux";
         modules = [
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           ./modules/common.nix
           ./modules/home.nix
           ./hosts/vm

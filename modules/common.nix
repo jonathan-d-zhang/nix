@@ -25,6 +25,24 @@ in
 
   services.tailscale.enable = true;
 
+  # ponytail: decrypt with jz9's personal age key rather than a per-host key, so
+  # there is no re-keying step when adding a host. Switch to
+  # `sops.age.generateKey = true` + the default /var/lib/sops-nix/key.txt (and add
+  # each host's public key to .sops.yaml) if secrets ever outgrow one person.
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.age.keyFile = "/home/jz9/.config/sops/age/keys.txt";
+  # Decrypted to /run/secrets/id_ed25519 and symlinked into ~/.ssh, so ssh finds
+  # it by its normal default lookup with no ssh_config entry.
+  sops.secrets.id_ed25519 = {
+    owner = "jz9";
+    mode = "0400";
+    path = "/home/jz9/.ssh/id_ed25519";
+  };
+  # Later, for env vars: declare the secret, then point a unit at it, e.g.
+  #   sops.secrets.api-token = { };
+  #   sops.templates."foo.env".content = "API_TOKEN=${config.sops.placeholder.api-token}";
+  #   systemd.services.foo.serviceConfig.EnvironmentFile = config.sops.templates."foo.env".path;
+
   time.timeZone = "America/New_York";
 
   users.users.jz9 = {
