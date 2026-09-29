@@ -98,7 +98,8 @@
 
         set-option -ga terminal-overrides ",xterm-256color:Tc"
 
-        source "${pkgs.powerline}/share/tmux/powerline_tmux_2.1_plus.conf"
+        run-shell "powerline-daemon -q"
+        source "${pkgs.powerline}/share/tmux/powerline.conf"
 
         set -g @continuum-restore 'on'
         set -g @continuum-save-interval '1'
