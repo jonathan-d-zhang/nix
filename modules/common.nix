@@ -43,6 +43,12 @@ in
     owner = "jz9";
     mode = "0400";
   };
+
+    programs.gnupg.agent = {
+        enable = true;
+        pinentryPackage = pkgs.pinentry-curses;
+    };
+
   # Later, for env vars: declare the secret, then point a unit at it, e.g.
   #   sops.secrets.api-token = { };
   #   sops.templates."foo.env".content = "API_TOKEN=${config.sops.placeholder.api-token}";
@@ -63,7 +69,7 @@ in
     git gh curl wget jq ripgrep fzf bat eza tree unzip xz p7zip
     plocate whois sshfs fortune cowsay lolcat hyperfine cloc
     fastfetch universal-ctags parallel pciutils nettools smartmontools
-    valgrind mold graphviz pandoc sops age cosign tailscale starship
+    valgrind mold graphviz pandoc gnupg sops age cosign tailscale starship
     kdePackages.kcachegrind zizmor
 
     # build toolchain

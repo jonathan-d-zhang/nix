@@ -10,6 +10,9 @@ $env:PATH = "$env:HOME/.local/bin:$env:PATH"
 # trailing colon, and an empty entry means "search the current directory".
 $env:LD_LIBRARY_PATH = if ($env:LD_LIBRARY_PATH) { "/usr/local/lib:$env:LD_LIBRARY_PATH" } else { "/usr/local/lib" }
 
+# Set GPG_TTY for pinentry-curses
+$env:GPG_TTY = (tty)
+
 # Set editor to vim...
 $env:EDITOR = "vim"
 
