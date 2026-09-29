@@ -3,7 +3,7 @@
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.jz9 = { pkgs, ... }:
+  home-manager.users.jz9 = { pkgs, lib, ... }:
   let
     claudePluginsOfficial = pkgs.fetchFromGitHub {
       name = "claude-plugins-official-source";
@@ -48,6 +48,11 @@
         credential."https://gist.github.com".helper = [ "" "!${pkgs.gh}/bin/gh auth git-credential" ];
       };
     };
+
+    # Idempotent: re-importing an existing key is a no-op.
+    home.activation.importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run ${pkgs.gnupg}/bin/gpg --batch --import ${config.sops.secrets.gpg_key.path}
+    '';
 
     programs.starship = {
       enable = true;

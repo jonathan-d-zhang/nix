@@ -38,6 +38,11 @@ in
     mode = "0400";
     path = "/home/jz9/.ssh/id_ed25519";
   };
+  # Armored secret key for git signing; imported into ~/.gnupg by home.nix.
+  sops.secrets.gpg_key = {
+    owner = "jz9";
+    mode = "0400";
+  };
   # Later, for env vars: declare the secret, then point a unit at it, e.g.
   #   sops.secrets.api-token = { };
   #   sops.templates."foo.env".content = "API_TOKEN=${config.sops.placeholder.api-token}";
